@@ -50,14 +50,7 @@
 	(test (eq ?u m))
 	=>
 	(assert (hermana ?z ?i)))
-	
-(defrule abuelo2
-	(padre ?padre_hijo ?hijo)
-	(padre ?abuelo ?padre_hijo)
-	=>
-	(assert (abuelo ?abuelo ?hijo))
-)	
-	
+
 (defrule abuelo
 	(padre ?u ?v)
 	(padre ?v ?y)
@@ -72,32 +65,24 @@
 	(assert(abuela ?u ?y))
 )
 	
-
-
 (defrule primo
-	/* 
-	 dd juan maria rosa m 
-	*/
-	(dd ?x ?y ?z ?u) ;; Coger de la memoria de trabajo
-
-	(padre ?a ?z) ;; coger el padre de la hija
-	(madre ?b ?z) ;; coger la madre de la hija
-
-	?hermanosPadre<-(hermano ?c ?a)
-	?hermanosMadre<-(hermano ?d ?b)
-	?hermanasPadre<-(hermana ?e ?a)
-	?hermanasMadre<-(hermana ?f ?b)
+	(dd ?p ?m ?h ?genre) ;; coger de...
 	
-	?hijoHermanoPadre<-(hijo ?x ?c)
-	?hijoHermanoMadre<-(hijo ?y ?d)
-	?hijoHermanaPadre<-(hijo ?w ?e)
-	?hijoHermanaMadre<-(hijo ?ww ?f)
-
-	=> 
-	(assert(primo ?x ?z))
-	(assert(primo ?y ?z))
-	(assert(primo ?w ?z))
-	(assert(primo ?ww ?z))
+	?hermanoPadre<-(hermano ?p ?a)
+	?hermanaPadre<-(hermana ?p ?b)
+	?hijoHermano<-(hijo ?c ?a)
+	?hijoHermana<-(hijo ?d ?b)
+	
+	?hermanoMadre<-(hermano ?m ?e)
+	?hermanaMadre<-(hermana ?m ?f)
+	?hijoHermano<-(hijo ?g ?e)
+	?hijoHermana<-(hijo ?h ?f)
+	
+	=>
+	(assert(primo ?c ?h))
+	(assert(primo ?d ?h))
+	(assert(primo ?g ?h))
+	(assert(primo ?h ?h))
 )
 
 	
