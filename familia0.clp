@@ -31,8 +31,8 @@
 
 (defrule hermano
  	(dd ?x ?y ?z ?u)
-	;;?h1<-(padre ?j ?i) asigna el hecho (padre ?j ?i) a variable ?h1
-	;;?h2<-(madre ?k ?i)
+	?h1<-(padre ?j ?i) asigna el hecho (padre ?j ?i) a variable ?h1
+	?h2<-(madre ?k ?i)
 	(test(= ?j ?x))
 	(test(= ?k ?y))
 	(test(eq ?u h))
