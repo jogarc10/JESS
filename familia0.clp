@@ -65,6 +65,23 @@
 	(assert(abuela ?u ?y))
 )
 	
+
+(defrule primo
+	;;dd juan maria rosa m
+	(dd ?x ?y ?z ?u) ;; Coger de la memoria de trabajo
+
+	(padre ?a ?z) ;; coger el padre (a es padre de b)
+	(madre ?b ?z) ;; coger la madre (c es madre de d)
+
+	?hermanosPadre<-(hermano ?c ?a)
+	?hermanosMadre<-(hermano ?d ?b)
+	
+	?hijoHermanoPadre<-(hijo ?x ?c)
+	?hijoHermanoMadre<-(hijo ?y ?d)
+
+	=> 
+	(assert(primo ?x ?z)))
+	
 (reset)
 (run)
 (facts)
