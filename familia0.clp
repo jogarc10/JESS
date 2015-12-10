@@ -51,6 +51,13 @@
 	=>
 	(assert (hermana ?z ?i)))
 	
+(defrule abuelo2
+	(padre ?padre_hijo ?hijo)
+	(padre ?abuelo ?padre_hijo)
+	=>
+	(assert (abuelo ?abuelo ?hijo))
+)	
+	
 (defrule abuelo
 	(padre ?u ?v)
 	(padre ?v ?y)
