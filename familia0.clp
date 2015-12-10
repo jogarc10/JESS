@@ -78,14 +78,21 @@
 
 	?hermanosPadre<-(hermano ?c ?a)
 	?hermanosMadre<-(hermano ?d ?b)
+	?hermanasPadre<-(hermana ?e ?a)
+	?hermanasMadre<-(hermana ?f ?b)
 	
 	?hijoHermanoPadre<-(hijo ?x ?c)
 	?hijoHermanoMadre<-(hijo ?y ?d)
+	?hijoHermanaPadre<-(hijo ?w ?e)
+	?hijoHermanaMadre<-(hijo ?ww ?f)
 
 	=> 
 	(assert(primo ?x ?z))
 	(assert(primo ?y ?z))
+	(assert(primo ?w ?z))
+	(assert(primo ?ww ?z))
 )
+
 	
 (reset)
 (run)
