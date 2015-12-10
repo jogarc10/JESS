@@ -3,7 +3,9 @@
     (dd juan maria luis h)
     (dd jose laura pilar m)
     (dd luis pilar miguel h)
-    (dd miguel isabel jaime h))
+    (dd miguel isabel jaime h)
+    (dd pedro rosa pepe h)
+    (dd pedro rosa pura m))
 
 (defrule padre
     (dd ?x ? ?y ?)
@@ -31,8 +33,8 @@
 
  (defrule hermano
  	(dd ?x ?y ?z ?u)
-	?h1<-(padre ?j ?i)
-	?h2<-(madre ?k ?i)
+	(padre ?j ?i)
+	(madre ?k ?i)
 	(test (= ?j ?x))
 	(test (= ?k ?y))
 	(not(test (= ?z ?i)))
@@ -42,50 +44,55 @@
 
 (defrule hermana
 	(dd ?x ?y ?z ?u)
-	?h1<-(padre ?j ?i)
-	?h2<-(madre ?k ?i)
+	(padre ?j ?i)
+	(madre ?k ?i)
 	(test (= ?j ?x))
 	(test (= ?k ?y))
 	(not (test (= ?z ?i)))
 	(test (eq ?u m))
 	=>
 	(assert (hermana ?z ?i)))
-
+  
 (defrule abuelo
 	(padre ?u ?v)
-	(padre ?v ?y)
+	(or (padre ?v ?y) 
+	(madre ?v ?y))
 	=>
 	(assert(abuelo ?u ?y))
 )
 
 (defrule abuela
 	(madre ?u ?v)
-	(madre ?v ?y)
+	(or (padre ?v ?y) 
+	(madre ?v ?y))
 	=>
 	(assert(abuela ?u ?y))
 )
-	
+
 (defrule primo
-	(dd ?p ?m ?h ?genre) ;; coger de...
-	
-	?hermanoPadre<-(hermano ?a ?p)
-	?hermanaPadre<-(hermana ?b ?p)
-	?hijoHermano<-(hijo ?a ?c)
-	?hijoHermana<-(hijo ?b ?d)
-	
-	?hermanoMadre<-(hermano ?e ?m)
-	?hermanaMadre<-(hermana ?f ?m)
-	?hijoHermano<-(hijo ?e ?g)
-	?hijoHermana<-(hijo ?f ?h)
-	
+	(or(hijo ?x ?y) (hija  ?x ?y))
+	(or (hermano ?y ?z) (hermana ?y ?z))
+	(hijo ?u ?z)
 	=>
-	(assert(primo ?c ?h))
-	(assert(primo ?d ?h))
-	(assert(primo ?g ?h))
-	(assert(primo ?h ?h))
+	(assert (primo ?u ?x))
 )
 
-	
+(defrule prima
+	(or(hijo ?x ?y) (hija  ?x ?y))
+	(or (hermano ?y ?z) (hermana ?y ?z))
+	(hija ?u ?z)
+	=>
+	(assert (prima ?u ?x))
+)
+
+(defrule ascendiente
+	(or (or (padre ?x ?y) (madre ?x ?y)) 
+	(and (ascendiente ?x ?z) (or (padre ?z ?y) (madre ?z ?y))))
+	=>
+	(assert(ascendiente ?x ?y))
+)
+
+
 (reset)
 (run)
 (facts)
