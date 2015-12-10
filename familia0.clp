@@ -66,12 +66,15 @@
 )
 	
 
+
 (defrule primo
-	;;dd juan maria rosa m
+	/* 
+	 dd juan maria rosa m 
+	*/
 	(dd ?x ?y ?z ?u) ;; Coger de la memoria de trabajo
 
-	(padre ?a ?z) ;; coger el padre (a es padre de b)
-	(madre ?b ?z) ;; coger la madre (c es madre de d)
+	(padre ?a ?z) ;; coger el padre de la hija
+	(madre ?b ?z) ;; coger la madre de la hija
 
 	?hermanosPadre<-(hermano ?c ?a)
 	?hermanosMadre<-(hermano ?d ?b)
@@ -80,7 +83,9 @@
 	?hijoHermanoMadre<-(hijo ?y ?d)
 
 	=> 
-	(assert(primo ?x ?z)))
+	(assert(primo ?x ?z))
+	(assert(primo ?y ?z))
+)
 	
 (reset)
 (run)
