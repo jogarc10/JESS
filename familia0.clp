@@ -68,15 +68,15 @@
 (defrule primo
 	(dd ?p ?m ?h ?genre) ;; coger de...
 	
-	?hermanoPadre<-(hermano ?p ?a)
-	?hermanaPadre<-(hermana ?p ?b)
-	?hijoHermano<-(hijo ?c ?a)
-	?hijoHermana<-(hijo ?d ?b)
+	?hermanoPadre<-(hermano ?a ?p)
+	?hermanaPadre<-(hermana ?b ?p)
+	?hijoHermano<-(hijo ?a ?c)
+	?hijoHermana<-(hijo ?b ?d)
 	
-	?hermanoMadre<-(hermano ?m ?e)
-	?hermanaMadre<-(hermana ?m ?f)
-	?hijoHermano<-(hijo ?g ?e)
-	?hijoHermana<-(hijo ?h ?f)
+	?hermanoMadre<-(hermano ?e ?m)
+	?hermanaMadre<-(hermana ?f ?m)
+	?hijoHermano<-(hijo ?e ?g)
+	?hijoHermana<-(hijo ?f ?h)
 	
 	=>
 	(assert(primo ?c ?h))
